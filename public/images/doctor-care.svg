@@ -1,0 +1,17 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" rx="36" fill="#E0F2FE"/>
+  <circle cx="820" cy="180" r="120" fill="#7DD3FC"/>
+  <rect x="180" y="120" width="420" height="560" rx="28" fill="white"/>
+  <rect x="220" y="180" width="340" height="34" rx="12" fill="#E2E8F0"/>
+  <rect x="220" y="236" width="260" height="24" rx="10" fill="#E2E8F0"/>
+  <rect x="220" y="292" width="300" height="24" rx="10" fill="#E2E8F0"/>
+  <rect x="220" y="348" width="220" height="24" rx="10" fill="#E2E8F0"/>
+  <rect x="680" y="280" width="300" height="320" rx="40" fill="#0EA5E9"/>
+  <circle cx="830" cy="230" r="90" fill="#FEF3C7"/>
+  <rect x="760" y="320" width="140" height="80" rx="16" fill="white"/>
+  <rect x="816" y="342" width="28" height="36" rx="6" fill="#0EA5E9"/>
+  <rect x="796" y="356" width="68" height="8" rx="4" fill="#0EA5E9"/>
+  <rect x="720" y="620" width="220" height="28" rx="14" fill="#0369A1"/>
+  <text x="230" y="160" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#0F172A">Doctor Panel</text>
+  <text x="720" y="676" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="white">ChronicCare Pro</text>
+</svg>
