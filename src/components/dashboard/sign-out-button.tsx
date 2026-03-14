@@ -25,6 +25,9 @@ export function SignOutButton({
   async function signOut() {
     const supabase = createClient();
     await supabase.auth.signOut();
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('ccp_auth_toast', 'logged_out');
+    }
     router.push('/login');
     router.refresh();
   }

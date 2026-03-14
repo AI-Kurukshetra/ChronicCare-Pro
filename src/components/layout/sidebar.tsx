@@ -25,12 +25,12 @@ import {
   UsersRound,
   ChevronLeft,
   ChevronRight,
-  UserCircle2,
   LogOut
 } from 'lucide-react';
 
 import { SignOutButton } from '@/components/dashboard/sign-out-button';
 import { BrandMark } from '@/components/brand/brand-mark';
+import { ProfileMenu } from '@/components/profile/profile-menu';
 import { APP_NAME, APP_TAGLINE } from '@/lib/branding';
 import { AppRole, getDashboardPathByRole } from '@/lib/auth/roles';
 import { cn } from '@/lib/utils';
@@ -41,19 +41,10 @@ type SidebarLink = {
   icon: LucideIcon;
 };
 
-function getInitials(name: string | null, email: string | null) {
-  const source = (name && name.trim()) || (email && email.trim()) || 'U';
-  const parts = source.split(' ').filter(Boolean);
-  if (parts.length >= 2) {
-    return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
-  }
-
-  return source.slice(0, 2).toUpperCase();
-}
-
 export function Sidebar({
   role,
   isAuthenticated,
+  userId,
   userName,
   userEmail,
   isCollapsed,
@@ -63,6 +54,7 @@ export function Sidebar({
 }: {
   role: AppRole | null;
   isAuthenticated: boolean;
+  userId: string | null;
   userName: string | null;
   userEmail: string | null;
   isCollapsed: boolean;
@@ -72,7 +64,6 @@ export function Sidebar({
 }) {
   const pathname = usePathname();
   const links: SidebarLink[] = [];
-  const initials = getInitials(userName, userEmail);
 
   if (isAuthenticated && role) {
     links.push({ href: getDashboardPathByRole(role), label: 'Dashboard', icon: LayoutDashboard });
@@ -213,27 +204,15 @@ export function Sidebar({
 
       {isAuthenticated && role && (
         <div className={cn('mt-auto border-t pt-4', isCollapsed && 'md:pt-3')}>
-          <div className={cn('mb-3 flex items-center gap-3', isCollapsed && 'justify-center')}>
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-sm font-semibold text-blue-700">
-              {isCollapsed ? <UserCircle2 className="h-5 w-5" /> : initials}
-            </div>
-            <div
-              className={cn(
-                'min-w-0 overflow-hidden transition-all duration-200',
-                isCollapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'
-              )}
-            >
-              <p className="truncate text-sm font-medium">{userName || userEmail || 'User'}</p>
-              <p
-                className={cn(
-                  'truncate text-xs capitalize',
-                  role === 'doctor' || role === 'admin' || role === 'patient' ? 'text-blue-200' : 'text-muted-foreground'
-                )}
-              >
-                {role}
-              </p>
-            </div>
-          </div>
+          {userId && (
+            <ProfileMenu
+              userId={userId}
+              role={role}
+              userName={userName}
+              userEmail={userEmail}
+              isCollapsed={isCollapsed}
+            />
+          )}
 
           <SignOutButton
             className={cn('w-full', isCollapsed && 'px-0')}

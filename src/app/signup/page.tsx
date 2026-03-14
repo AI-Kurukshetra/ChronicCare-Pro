@@ -98,19 +98,39 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-50 px-4 py-10">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(37,99,235,0.18),transparent_40%),radial-gradient(circle_at_80%_15%,rgba(14,165,233,0.14),transparent_40%)]" />
-      <Card className="relative z-10 w-full max-w-2xl rounded-3xl border-blue-100/80 shadow-xl">
-        <CardHeader>
-          <div className="mb-2 inline-flex items-center gap-2">
-            <BrandMark />
-            <p className="text-sm font-semibold text-slate-700">{APP_NAME}</p>
+    <div className="min-h-screen bg-slate-100 p-4 md:p-6">
+      <div className="mx-auto grid min-h-[calc(100vh-2rem)] max-w-7xl overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl md:min-h-[calc(100vh-3rem)] lg:grid-cols-2">
+        <section className="relative hidden bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-700 p-8 text-white lg:block">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(255,255,255,0.22),transparent_45%)]" />
+          <div className="relative space-y-6">
+            <div className="inline-flex items-center gap-2">
+              <BrandMark />
+              <p className="text-sm font-semibold">{APP_NAME}</p>
+            </div>
+            <h1 className="max-w-md text-4xl font-semibold leading-tight">Launch your chronic care workspace in minutes.</h1>
+            <p className="max-w-md text-sm text-blue-100">
+              Onboard as patient or doctor and start remote monitoring, medication workflows, appointment management, and AI insights.
+            </p>
+            <div className="grid max-w-md gap-3 text-sm text-blue-100">
+              <div className="rounded-xl border border-white/20 bg-white/10 p-3">Role-based access for patients and doctors</div>
+              <div className="rounded-xl border border-white/20 bg-white/10 p-3">Realtime alerts, messaging, and appointment flows</div>
+              <div className="rounded-xl border border-white/20 bg-white/10 p-3">Production-ready healthcare SaaS architecture</div>
+            </div>
           </div>
-          <CardTitle>Create your {APP_NAME} account</CardTitle>
-          <CardDescription>{APP_TITLE}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form className="space-y-4" onSubmit={onSubmit}>
+        </section>
+
+        <section className="flex items-start justify-center overflow-y-auto p-6 md:p-10">
+          <Card className="w-full max-w-2xl rounded-2xl border-slate-200 shadow-sm">
+            <CardHeader>
+              <div className="mb-2 inline-flex items-center gap-2">
+                <BrandMark />
+                <p className="text-sm font-semibold text-slate-700">{APP_NAME}</p>
+              </div>
+              <CardTitle>Create your {APP_NAME} account</CardTitle>
+              <CardDescription>{APP_TITLE}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form className="space-y-4" onSubmit={onSubmit}>
             <div className="grid grid-cols-2 gap-2 rounded-xl border border-blue-100 bg-blue-50/40 p-1">
               <button
                 type="button"
@@ -325,9 +345,11 @@ export default function SignupPage() {
                 Sign in
               </Link>
             </p>
-          </form>
-        </CardContent>
-      </Card>
+              </form>
+            </CardContent>
+          </Card>
+        </section>
+      </div>
     </div>
   );
 }

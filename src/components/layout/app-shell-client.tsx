@@ -4,23 +4,27 @@ import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Bell, Menu, Search } from 'lucide-react';
 
+import { AuthToastListener } from '@/components/auth/auth-toast-listener';
 import { Sidebar } from '@/components/layout/sidebar';
 import { PublicNavbar } from '@/components/layout/public-navbar';
 import { ToastProvider } from '@/components/ui/toaster';
 import { type AppRole } from '@/lib/auth/roles';
 
 const publicPaths = new Set(['/', '/login', '/signup', '/register', '/set-password']);
+const hidePublicNavbarPaths = new Set(['/login', '/signup', '/register', '/set-password']);
 
 export function AppShellClient({
   children,
   role,
   isAuthenticated,
+  userId,
   userName,
   userEmail
 }: {
   children: React.ReactNode;
   role: AppRole | null;
   isAuthenticated: boolean;
+  userId: string | null;
   userName: string | null;
   userEmail: string | null;
 }) {
@@ -40,10 +44,12 @@ export function AppShellClient({
     : 'Dashboard';
 
   if (isPublicPage) {
+    const showPublicNavbar = pathname ? !hidePublicNavbarPaths.has(pathname) : true;
     return (
       <ToastProvider>
+        <AuthToastListener />
         <div className="min-h-screen bg-slate-50">
-          <PublicNavbar />
+          {showPublicNavbar && <PublicNavbar />}
           <main className="w-full">{children}</main>
         </div>
       </ToastProvider>
@@ -52,6 +58,7 @@ export function AppShellClient({
 
   return (
     <ToastProvider>
+      <AuthToastListener />
       <div className="min-h-screen bg-slate-50">
         <div className="sticky top-0 z-30 flex items-center justify-between border-b bg-white/95 px-4 py-3 backdrop-blur md:hidden">
           <button
@@ -78,6 +85,7 @@ export function AppShellClient({
           <Sidebar
             role={role}
             isAuthenticated={isAuthenticated}
+            userId={userId}
             userName={userName}
             userEmail={userEmail}
             isCollapsed={isCollapsed}
